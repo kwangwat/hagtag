@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="<?php echo $this->sysSetting['HT_meta_description']?>">
+    <meta name="author" content="<?php echo $this->sysSetting['HT_meta_author']?>">
+    <meta name="keyword" content="<?php echo $this->sysSetting['HT_meta_keywords']?>">
+    <link rel="shortcut icon" href="img/favicon.png">
+    <meta name="google-signin-client_id" content="784155728777-h4iodu2gli7uq4s3gnboo8j2v2d38l8m.apps.googleusercontent.com">
+    
+    <title><?php echo $this->sysSetting['HT_admin_application_page']?> : <?php echo $this->tr->_('SIGN_IN')?></title>
+    <!-- Bootstrap core CSS -->
+    <link href="/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/css/bootstrap-reset.css" rel="stylesheet">
+    <!-- Custom styles for this template -->
+    <link href="/css/style.css" rel="stylesheet">
+    <link href="/css/style-responsive.css" rel="stylesheet" />
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 tooltipss and media queries -->
+    <!--[if lt IE 9]>
+    <script src="/js/html5shiv.js"></script>
+    <script src="/js/respond.min.js"></script>
+    <![endif]-->
+</head>
+  <body class="login-body">
+    <div class="container">
+      <form class="form-signin" action="/admin/index/login" id="loginpage" name="loginpage" method="post" onsubmit="return Validate();" enctype="application/x-www-form-urlencoded" >
+        <h2 class="form-signin-heading"> <?php echo $this->tr->_('SIGN_IN_NOW');?></h2>
+        <div class="login-wrap">
+            <input type="text" class="form-control" id="IDToken1" name="IDToken1" tabindex="1" placeholder="User ID" autofocus="autofocus" value="">
+            <input type="password" class="form-control" id="IDToken2" name="IDToken2" tabindex="2" placeholder="Password">
+            <label class="checkbox">
+                <input type="checkbox" value="remember-me"> <?php echo $this->tr->_('REMEMBER_ME_ON_THIS_COMPUTER');?>
+                <span class="pull-right">
+                    <a data-toggle="modal" href="#myModal"> <?php echo $this->tr->_('FORGOT_YOUR_PASSWORD');?></a>
+                </span>
+            </label>
+            <button class="btn btn-lg btn-login btn-block" type="submit" title="Login"> <?php echo $this->tr->_('SIGN_IN');?></button>
+            <p>or you can sign in via social network</p>
+            <div class="login-social-link">
+                <a href="<?php echo $this->loginFburl;?>" class="facebook">
+                    <i class="icon-facebook"></i>
+                    Facebook
+                </a>
+                <a href="#" class="twitter">
+                    <i class="icon-twitter"></i>
+                    Twitter
+                </a>
+            </div>
+            <div class="registration">
+                Don't have an account yet?
+                <a class="" href="registration.html">
+                    Create an account
+                </a>
+            </div>
+        </div>
+          <!-- Modal -->
+          <div aria-hidden="true" aria-labelledby="myModalLabel" role="dialog" tabindex="-1" id="myModal" class="modal fade">
+              <div class="modal-dialog">
+                  <div class="modal-content">
+                      <div class="modal-header">
+                          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                          <h4 class="modal-title"> <?php echo $this->tr->_('FORGOT_YOUR_PASSWORD');?></h4>
+                      </div>
+                      <div class="modal-body">
+                          <p>Enter your e-mail address below to reset your password.</p>
+                          <input type="text" name="email" placeholder="Email" autocomplete="off" class="form-control placeholder-no-fix">
+
+                      </div>
+                      <div class="modal-footer">
+                          <button data-dismiss="modal" class="btn btn-default" type="button"> <?php echo $this->tr->_('CANCEL')?></button>
+                          <button class="btn btn-success" type="button"> <?php echo $this->tr->_('SUBMIT')?></button>
+                      </div>
+                  </div>
+              </div>
+          </div>
+          <!-- modal -->
+      </form>
+    </div>
+    
+    <div id="results"></div>
+    
+    <div class="g-signin2" data-onsuccess="onSignIn"></div>
+    
+    <!-- Container with the Sign-In button. -->
+    <div id="gConnect" class="button">
+      <button class="g-signin"
+          data-scope="email"
+          data-clientid="784155728777-h4iodu2gli7uq4s3gnboo8j2v2d38l8m.apps.googleusercontent.com"
+          data-callback="onSignInCallback"
+          data-theme="dark"
+          data-cookiepolicy="single_host_origin">
+      </button>
+      <!-- Textarea for outputting data -->
+      <div id="response" class="hide">
+        <textarea id="responseContainer" style="width:100%; height:150px"></textarea>
+      </div>
+    </div>
+    <a href="#" onclick="signOut();">Sign out</a>
+<script>
+  function signOut() {
+    var auth2 = gapi.auth2.getAuthInstance();
+    auth2.signOut().then(function () {
+      console.log('User signed out.');
+    });
+  }
+</script>
+    
+    <!-- js placed at the end of the document so the pages load faster -->
+    <script src="/js/jquery.js"></script>
+    <script src="/js/bootstrap.min.js"></script>
+    <!-- Include the API client and Google+ client. -->
+    <script src = "https://plus.google.com/js/client:platform.js" async defer></script>
+    <!-- <script src="https://apis.google.com/js/platform.js?onload=renderButton" async defer></script> -->
+    <?php if($this->error): ?>
+    <div id="ErrorMessage" class="ui-widget" style="width: 300px; position: absolute; display: none;">
+        <div class="ui-state-error ui-corner-all" style="padding: 0 .7em;">
+            <p>
+                <span class="ui-icon ui-icon-alert" style="float: left; margin-right: .3em;"></span>
+                <strong><?php echo $this->tr->_('ALERT')?>:</strong>
+                <?php if($this->error == 1): ?> <?php echo $this->tr->_('LOGIN_ERR_MSG_CODE_1')?>
+                <?php elseif($this->error == 2): ?> <?php echo $this->tr->_('LOGIN_ERR_MSG_CODE_2')?>
+                <?php elseif($this->error == 3): ?> <?php echo $this->tr->_('LOGIN_ERR_MSG_CODE_3')?>
+                <?php elseif($this->error == 4): ?> <?php echo $this->tr->_('LOGIN_ERR_MSG_CODE_4')?>
+                <?php elseif($this->error == 5): ?> <?php echo $this->tr->_('LOGIN_ERR_MSG_CODE_5')?>
+                <?php elseif($this->error == 6): ?> <?php echo $this->tr->_('LOGIN_ERR_MSG_CODE_6')?>
+                <?php endif; ?>
+            </p>
+        </div>
+    </div>
+    <script type="text/javascript">
+        $(document).ready(function(){
+            var msg = $("#ErrorMessage");
+            var width = msg.width();
+            var style = {
+                top: 70,
+                left: (($(document).width() - width)/2)
+            };
+            msg.css(style).show(500).delay(500).effect('shake', {}, 800, function(){
+                $(this).delay(5000).effect('fade', 5000);
+            });
+        });
+    </script>
+    <?php endif;?>
+  </body>
+  <script>
+  function Validate() {
+      var theUsername = document.loginpage.IDToken1.value;
+      var thePassword = document.loginpage.IDToken2.value;
+
+      var validUser = validateUser(theUsername);
+      if(!validUser) {
+          document.loginpage.IDToken1.focus();
+          return false;
+      }
+
+      var validPsswd = validatePsswd(thePassword);
+      if(!validPsswd) {
+          document.loginpage.IDToken2.focus();
+          return false;
+      }
+      return document.loginpage.submit();
+  }
+
+// User Name validation for Login Pages
+  function validateUser(theUsername) {
+
+      if (theUsername.length < 1) {
+          alert('Please enter your User ID.');
+          return false;
+      } else if (theUsername.length > 45) {
+          alert('User ID can not be longer than 45 characters.');
+          return false;
+      } else if (!(/^[A-Za-z0-9.\-_]{1,100}$/.test(theUsername))) {
+          alert('You have entered a User ID with invalid characters. \nPlease enter a User ID using letters, numbers or dots. \nCharacters such as &, $, %, / or space may not be used.');
+          return false;
+      }
+      return true;
+  }
+
+  // Password validation for Login Pages
+  function validatePsswd(thePassword) {
+
+      if (thePassword.length < 1) {
+          alert('Please enter your Password.');
+          return (false);
+      }
+
+      if (thePassword.length < 4) {
+          alert('Password must contain at least 6 characters.');
+          return (false);
+      }
+      if (thePassword.length > 16) {
+          alert('Password must contain less than 16 characters.');
+          return (false);
+      }
+
+      ref = "0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ~!@#$%^&*";
+      result = 1;
+      for (count = 0; count < thePassword.length; count++) {
+          chr = thePassword.substring(count, count + 1);
+          if (ref.indexOf(chr) < 0) {
+              result = 0;
+              offset = count + 1;
+              count = thePassword.length;
+          }
+      }
+      if (result == 0) {
+          alert("Password contains a blank space at position " + offset + ".");
+          return (false);
+      }
+
+      return true;
+  }
+  </script>
+  
+  <script>
+
+  function onSignIn(googleUser) {
+	  var profile = googleUser.getBasicProfile();
+	  console.log('ID: ' + profile.getId()); // Do not send to your backend! Use an ID token instead.
+	  console.log('Name: ' + profile.getName());
+	  console.log('Image URL: ' + profile.getImageUrl());
+	  console.log('Email: ' + profile.getEmail());
+	}
+	  
+  
+  /**
+   * Handler for the signin callback triggered after the user selects an account.
+   */
+  function onSignInCallback(resp) {
+    
+    if(resp['access_token']){
+    	gapi.client.load('plus', 'v1', apiClientLoaded);
+        //Successfully authorized
+        $.ajax({
+            type: 'POST',
+            url: '/plus.php?storeToken',
+            contentType: 'application/octet-stream; charset=utf-8',
+            success: function(result){
+                if(result){
+                    console.log(result);
+                }else{
+                    $("#results").html('Failed to make a server-side call.');
+                }
+            },
+            processData: false,
+            data: resp['code']
+        });
+        }else if(resp['error']){
+            //User is not signed in.
+        	console.log("There was an error: "+resp['error']);
+        	return;
+        }
+  }
+
+  /**
+   * Sets up an API call after the Google API client loads.
+   */
+  function apiClientLoaded() {
+    gapi.client.plus.people.get({userId: 'me'}).execute(handleEmailResponse);
+  }
+
+  /**
+   * Response callback for when the API client receives a response.
+   *
+   * @param resp The API response object with the user email and profile information.
+   */
+  function handleEmailResponse(resp) {
+    var primaryEmail;
+    if(resp.emails){
+        for (var i=0; i < resp.emails.length; i++) {
+          if (resp.emails[i].type === 'account') primaryEmail = resp.emails[i].value;
+        }
+    }
+    document.getElementById('responseContainer').value = 'Primary email: ' + primaryEmail + '\n\nFull Response:\n' + JSON.stringify(resp);
+  }
+
+  </script>
+  
+</html>

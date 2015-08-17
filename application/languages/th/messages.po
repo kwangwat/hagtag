@@ -1,0 +1,51 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: 1.0\n"
+"POT-Creation-Date: 2015-07-08 06:12:16\n"
+"PO-Revision-Date: 2015-07-08 06:12:16\n"
+"Last-Translator: \n"
+"Language-Team: Hagtag Team\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+msgid "CANCEL"
+msgstr "ยกเลิก"
+
+msgid "FORGOT_PASSWORD"
+msgstr "ลืมรหัสผ่าน ?"
+
+msgid "FORGOT_YOUR_PASSWORD"
+msgstr "ลืมรหัสผ่าน"
+
+msgid "LOGIN_ERR_MSG_CODE_1"
+msgstr "ชื่อผู้ใช้งานหรือรหัสผ่านไม่ถูกต้อง"
+
+msgid "LOGIN_ERR_MSG_CODE_2"
+msgstr "ระบบทำงานผิดพลาด <br />กรุณาติดต่อผู้ดูแลระบบ"
+
+msgid "LOGIN_ERR_MSG_CODE_3"
+msgstr "เวลาเครื่องของคุณไม่ตรงกับเวลาของระบบ <br /> กรุณาตั้งค่าให้ถูกต้อง"
+
+msgid "LOGIN_ERR_MSG_CODE_4"
+msgstr "ชื่อผู้ใช้นี้ไม่อนุญาติให้ใช้งานระบบ"
+
+msgid "LOGIN_ERR_MSG_CODE_5"
+msgstr "ชื่อผู้ใช้งานถูกระงับการใช้งาน"
+
+msgid "LOGIN_ERR_MSG_CODE_6"
+msgstr "คุณไม่ได้ใช้งานระบบเป็นเวลานาน <br /> กรุณาลงชื่อเข้าระบบอีกครั้ง"
+
+msgid "REMEMBER_ME_ON_THIS_COMPUTER"
+msgstr "จดจำฉันไว้ที่คอมพิวเตอร์เครื่องนี้"
+
+msgid "SIGN_IN"
+msgstr "เข้าสู่ระบบ"
+
+msgid "SIGN_IN_NOW"
+msgstr "เข้าสู่ระบบในขณะนี้"
+
+msgid "SUBMIT"
+msgstr "ตกลง"
+
+

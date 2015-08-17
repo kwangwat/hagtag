@@ -1,0 +1,47 @@
+<link rel="stylesheet" type="text/css" href="//cdn.datatables.net/1.10.7/css/jquery.dataTables.min.css">
+<table id="mainTable" class="display" width="100%" cellspacing="0">
+    <thead>
+        <tr>
+            <th>Login user</th>
+            <th>Group</th>
+            <th>Account name</th>
+            <th>Email</th>
+            <th>Privilage</th>
+            <th>Status</th>
+            <th>Last login</th>
+        </tr>
+    </thead>
+
+    <tbody>
+        <?php foreach ($this->data as $rows) :?>
+        <tr>
+            <td align="center"><?php echo $rows['use_login'];?></td>
+            <td align="center"><?php echo $rows['grp_name'];?></td>
+            <td align="center"><?php echo $rows['use_name']." ".$rows['use_lastname'];?></td>
+            <td align="center"><?php echo $rows['use_email'];?></td>
+            <td align="center"><?php echo $rows['use_privilage'];?></td>
+            <td align="center"><?php echo $rows['use_status'];?></td>
+            <td align="center"><?php echo $rows['use_lastlogin'];?></td>
+        </tr>
+        <?php endforeach;?>
+    </tbody>
+    
+    <tfoot>
+        <tr>
+            <th></th>
+            <th></th>
+            <th></th>
+            <th></th>
+            <th></th>
+            <th></th>
+            <th></th>
+        </tr>
+    </tfoot>
+</table>
+<script src="//cdn.datatables.net/1.10.7/js/jquery.dataTables.min.js"></script>
+<script type="text/javascript">
+$(document).ready(function() {
+    $('#mainTable').dataTable();
+
+} );
+</script>

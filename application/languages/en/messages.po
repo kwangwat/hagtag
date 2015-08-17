@@ -1,0 +1,51 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: 1.0\n"
+"POT-Creation-Date: 2015-07-08 06:12:16\n"
+"PO-Revision-Date: 2015-07-08 06:12:16\n"
+"Last-Translator: \n"
+"Language-Team: Hagtag Team\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+msgid "CANCEL"
+msgstr "Cancel"
+
+msgid "FORGOT_PASSWORD"
+msgstr "Forgot Password ?"
+
+msgid "FORGOT_YOUR_PASSWORD"
+msgstr "Forgot your password"
+
+msgid "LOGIN_ERR_MSG_CODE_1"
+msgstr "User name or password invalid !"
+
+msgid "LOGIN_ERR_MSG_CODE_2"
+msgstr "System error !.<br />Please contact administrator"
+
+msgid "LOGIN_ERR_MSG_CODE_3"
+msgstr "Your System datetime has change,<br />Please check to correct."
+
+msgid "LOGIN_ERR_MSG_CODE_4"
+msgstr "This user not allow to the system,<br />Please login the correct user."
+
+msgid "LOGIN_ERR_MSG_CODE_5"
+msgstr "This user is inactive on the system,<br />Please login with active user"
+
+msgid "LOGIN_ERR_MSG_CODE_6"
+msgstr "Server session timeout,<br />Please login again."
+
+msgid "REMEMBER_ME_ON_THIS_COMPUTER"
+msgstr "Remember me on this computer"
+
+msgid "SIGN_IN"
+msgstr "Sign in"
+
+msgid "SIGN_IN_NOW"
+msgstr "Sign in now"
+
+msgid "SUBMIT"
+msgstr "Submit"
+
+

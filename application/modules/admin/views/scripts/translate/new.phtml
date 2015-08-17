@@ -1,0 +1,74 @@
+<div class="tabletemplate">
+    <div><span><h4>TRANSLATE FORM</h4></span></div>
+    <form id="translate-form" name="translate-form" action="/admin/translate/{if $record.u_id}edit{else}new{/if}" method="post" enctype="application/x-www-form-urlencoded" onsubmit="return false;">
+        <input type="hidden" name="save" value="1" />
+        <table border="1" style="width: 100%;">
+            <tr>
+               <td>&nbsp;<span>CODE : </span></td>
+                <td>
+                    <input type="text" name="data[t_code]" id="strid" class="required textbox" value="<?php echo $this->code;?>" size="40" maxlength="100"/>
+                </td>
+            </tr>
+            <?php foreach($this->language as $line => $row):?>
+                <tr>
+                    <td>&nbsp;<span><?php echo $row['name'];?> : </span></td>
+                    <td>
+                        <input type="text" name="data[t_data][<?php echo $line;?>]" id="val" class="required textbox" value="<?php if(isset($row['data'])): echo $row['data']; endif;?>" size="40" maxlength="200" />
+                    </td>
+                </tr>
+            <?php endforeach;?>
+            <tr>
+                <td colspan="2">
+                    <input type="checkbox" id="compile" name="compile" value="1" />
+                    <label for="compile"><span></span> Compile on save</label>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2">
+                    <button type="button" class="btn-save submit" title="SAVE" <?php if ($this->mode == "edit") :?> onclick="getSave('{$code}');" <?php else :?> onclick="getSave();" <?php endif;?>>SAVE</button>
+                    <button type="button" class="btn-save-cont submit" title="Save & Cont." <?php if ($this->mode == "edit"):?> onclick="saveContinue('{$code}');" <?php else :?> onclick="saveContinue();" <?php endif;?>>Save & Cont.</button>
+                    <button class="btn-close cancel" type="button" title="CLOSE" onclick="window.close();">CLOSE</button>
+                </td>
+            </tr>
+        </table>
+    </form>
+</div>
+<?php if($this->mode == "view"):?>
+<script type="text/javascript">
+$(document).ready(function(){
+    $("input").attr("readonly", "readonly");
+    $("button[class='btn-save'], button[class='btn-edit'], button[class='btn-browse'], button[class='btn-clear']").remove();
+    $("select").disabled();
+});
+</script>
+<?php endif;?>
+<script>var LBL_SAVE_COMPLETE = "SAVE COMPLETE!";</script>
+<script>
+    function getSave(cont){
+        var error = 0;
+        $(".required").each(function(){
+            if(!$(this).val()) {
+                error++;
+            }
+        });
+        if(error > 0){
+            $(".required[value!='']").css("background-color","");
+            $(".required[value='']").css("background-color","#FFFFCC");
+            return alert("Please input on hilight!");
+        }
+        var data = $("#translate-form :input:not(button)").serialize();
+        $.post("/admin/translate/save-data", data, function(rs){
+            if(cont==true) {
+                window.location.href = "/admin/translate/edit/mode/new";
+            } else {
+                alert(LBL_SAVE_COMPLETE);
+                window.opener.$("form").get(0).submit();
+                setTimeout(function(){window.close();}, 500);
+            }
+        });
+    }
+
+    function saveContinue() {
+        getSave(true);
+    }
+</script>

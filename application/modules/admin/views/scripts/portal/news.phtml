@@ -1,0 +1,75 @@
+<div class="col-sm-6">
+	<h3>Last : Activity</h3>
+	<p>Activity of the day in this item of interest.</p>
+	<!------------------------------- DEMO 5 --------------------------->
+	<div class="news demof">
+		<ul>
+			<li><img src="/images/gallery/4.JPG" alt="" /><a href="#">CURREN New Fashion Men's</a><p>Date Stainless Steel Military Sport Quartz Wrist Watch</p></li>
+			<li class="odd"><img src="/images/gallery/5.JPG" alt="" /><a href="#">Military LED Day</a><p>Date Analog Army Steel Band Sport Quartz Mens Wrist Watch Black</p></li>
+			<li><img src="/images/gallery/6.JPG" alt="" /><a href="#">Men Fashion Watches</a><p>Stainless Steel Leather Band Quartz Analog Sport Wrist Watch</p></li>
+			<li class="odd"><img src="/images/gallery/7.JPG" alt="" /><a href="#">New Men's Analog Quartz</a><p>Date Sport Army Black Leather Wrist Watch</p></li>
+			<li><img src="/images/gallery/8.JPG" alt="" /><a href="#">New Women Handbag</a><p>Shoulder Bags Tote Purse PU Leather Ladies Messenger Hobo Bag</p></li>
+		</ul>
+	</div>
+</div> <!-- col-sm-9 -->
+<style>
+.demof{
+	border: 1px solid #ccc;
+	margin: 25px 0;
+}
+.demof ul{
+	padding: 0;
+	list-style: none;
+}
+.demof li{
+	padding: 20px;
+	border-bottom: 1px dashed #ccc;
+}
+.demof li.odd{
+	background: #fafafa;
+}
+.demof li:after {
+	content: '';
+	display: block;
+	clear: both;
+}
+.demof img{
+	float: left;
+	width: 120px;
+	margin: 5px 15px 0 0;
+}
+.demof a{
+	font-family: Arial, sans-serif;
+	font-size: 20px;
+	font-weight: bold;
+	color: #06f;
+}
+.demof p {
+	margin: 15px 0 0;
+	font-size: 14px;
+}
+
+.news{
+    border: 2px solid #ccc;
+    margin-top: 10px;
+}
+.news ul{
+    padding: 0;
+}
+.news ul li{
+    padding: 10px 10px 10px 10px;
+    border-bottom: 1px solid #ccc;
+    list-type: none;
+    margin: 0;
+}
+</style>
+<script type="text/javascript" src="http://vaakash.github.io/jquery/easy-ticker.js"></script>
+<script>
+$(function(){
+	$('.news').easyTicker({
+		direction: 'down',
+		visible: 3,
+		interval: 4500
+	});
+});
+</script>

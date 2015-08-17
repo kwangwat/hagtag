@@ -1,0 +1,11 @@
+2015-08-11T04:45:08+02:00 ERR (3): Action "img" does not exist and was not trapped in __call()
+#0 /opt/lampp/htdocs/hagtag/vendor/ZendFramework/library/Zend/Controller/Action.php(518): Zend_Controller_Action->__call('imgAction', Array)
+#1 /opt/lampp/htdocs/hagtag/vendor/ZendFramework/library/Zend/Controller/Dispatcher/Standard.php(308): Zend_Controller_Action->dispatch('imgAction')
+#2 /opt/lampp/htdocs/hagtag/vendor/ZendFramework/library/Zend/Controller/Front.php(954): Zend_Controller_Dispatcher_Standard->dispatch(Object(Zend_Controller_Request_Http), Object(Zend_Controller_Response_Http))
+#3 /opt/lampp/htdocs/hagtag/vendor/ZendFramework/library/Zend/Application/Bootstrap/Bootstrap.php(105): Zend_Controller_Front->dispatch()
+#4 /opt/lampp/htdocs/hagtag/vendor/ZendFramework/library/Zend/Application.php(384): Zend_Application_Bootstrap_Bootstrap->run()
+#5 /opt/lampp/htdocs/hagtag/public/index.php(34): Zend_Application->run()
+#6 {main}
+{"module":"admin","controller":"index","action":"img"}
+HTTP_ACCEPT: text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8
+

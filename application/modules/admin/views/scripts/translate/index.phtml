@@ -1,0 +1,171 @@
+<link rel="stylesheet" type="text/css" href="//cdn.datatables.net/1.10.7/css/jquery.dataTables.min.css">
+<form method="POST" action="/admin/translate/index" enctype="application/x-www-form-urlencoded" name="translate" onsubmit="return false;" >
+    <table width="100%" cellspacing="0" border="1">
+        <tr>
+            <td><span>Language</span> : </td>
+            <td>
+                <select name="type_code" class="width-220" onchange="$('form').get(0).submit();">
+                    <option value=""> -- All -- </option>
+                    <?php  foreach($this->language as $row): ?>
+                    <?php if(isset($this->params['type_code']) && $this->params['type_code'] == $row): ?>
+                        <option value="<?php echo $row;?>" selected="selected"><?php echo $row;?></option>
+                    <?php else :?>
+                        <option value="<?php echo $row;?>"><?php echo $row;?></option>
+                    <?php endif; ?>
+                    <?php endforeach; ?>
+                    ?>
+                </select>
+            </td>
+            <!--<td>
+             <span class="table-filter-label"();>Keyword: </span>
+             <input type="text" name="keyword" id="keyword" value="" onkeyup="if(event.keyCode === 13) $('form').get(0).submit();" />
+            </td>
+            <td>
+                <button type="button" class="submit" onclick="$('form').get(0).submit();">
+                    <span class="icons picsearch"></span>
+                    <span style="float:right;">Search</span>
+                </button> 
+            </td> -->
+        </tr>
+        <tr>
+            <td><span>Translate form</span></td>
+            <td>
+                <input type="button" name="new" onclick="getNew();" value="New">
+                <input type="button" name="delete" onclick="delectSelect('trans-list');" value="Delete">
+                <input type="button" name="reload" onclick="window.document.location.reload(true);" value="Refresh">
+                <input type="button" name="compile" onclick="getComplie();" value="Complie">
+            </th>
+        </tr>
+    </table>
+    <table id="mainTable" class="display" width="100%" cellspacing="0" border="1">
+    <thead>
+    <tr>
+        <th></th>
+        <th>Code</th>
+        <th>Label name</th>
+        <th>Label title</th>
+        <th>Action</th>
+    </tr>
+    </thead>
+    <tbody>
+    <?php foreach($this->entries as $line => $row):?>
+        <tr>
+            <td>
+                <input type="checkbox" name="select[]" id="select-row" value="<?php echo $row['msgid'];?>"/>
+            </td>
+            <td><?php echo $row['language'];?></td>
+            <td>&nbsp;<?php echo $row['msgid'];?></td>
+            <td>&nbsp;<?php echo $row['msgstr'];?></td>
+            <td>
+                <input type="button" name="edit" onclick="getEdit('<?php echo $row['id'];?>');" value="Edit" />
+                <input type="button" name="view" onclick="getView('<?php echo $row['id'];?>');" value="View" />
+                <input type="button" name="delete" onclick="confirmDelete('<?php echo $row['msgid'];?>');" value="Delete" />
+            </td>
+       </tr>
+    <?php endforeach;?>   
+    </tbody>
+    <tfoot>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+    </tfoot>             
+</table>
+</form>
+<br/><br/>
+<script src="//cdn.datatables.net/1.10.7/js/jquery.dataTables.min.js"></script>
+<script type="text/javascript">
+$(document).ready(function() {
+    $('#mainTable').dataTable();
+
+} );
+</script>
+<script>
+var LBL_CONFIRM_DELETE_MSG = "Are you sure to delete this record ?";
+var LBL_DELETE_COMPLETE = "Delect complete!";
+var LBL_CONFIRM_COMPILE = "Are you sure to complie language ?";
+var LBL_COMPILE_COMPLETE = "Complie complete!";
+var LBL_PLEASE_SELECT_RECORD_FOR_THIS_ACTION = "Please select record for this action!";
+</script>
+<script type="text/javascript">
+    function confirmDelete(id) {
+        if (!id) {
+            return;
+        }
+        if (confirm(LBL_CONFIRM_DELETE_MSG)) {
+            $.post("/admin/translate/delete", {"id": id}, function(rs) {
+                alert(LBL_DELETE_COMPLETE);
+                window.location.href = "/admin/translate/index";
+            });
+        }
+    }
+
+    function getComplie() {
+        if (confirm(LBL_CONFIRM_COMPILE)) {
+            $.post("/admin/translate/complie", {"lang": $(":selected").val()}, function(rs) {
+                alert(LBL_COMPILE_COMPLETE);
+                window.location.href = "/admin/translate/index";
+            });
+        }
+
+    }
+    function delectSelect(tableId) {
+        var params = {};
+        var isSelect = false;
+        $("input[id=select-row]", document.getElementById(tableId)).each(function(i, e) {
+            if (this.checked) {
+                params[this.name.toString().replace("[]", "[" + i + "]")] = this.value;
+                if (isSelect == false) {
+                    isSelect = true;
+                }
+            }
+        });
+        if (isSelect == false) {
+            alert(LBL_PLEASE_SELECT_RECORD_FOR_THIS_ACTION);
+            return;
+        } else {
+            if (confirm(LBL_CONFIRM_DELETE_MSG)) {
+                $.post("/admin/translate/delete", params, function(rs) {
+                    alert(LBL_DELETE_COMPLETE);
+                    window.location.href = "/admin/translate/index";
+                });
+            }
+        }
+    }
+    function getNew() {
+        var url = '/admin/translate/edit/mode/new';
+        App.openWindow(url, "NewForm", 600, 400);
+
+    }
+    function getEdit(id) {
+        var url = '/admin/translate/edit/id/' + id + '/mode/edit';
+        App.openWindow(url, "EditFrom", 600, 400);
+    }
+    function getView(id) {
+        var url = '/admin/translate/edit/id/' + id + "/mode/view";
+        App.openWindow(url, "EditFrom", 600, 400);
+    }
+    $(document).ready(function() {
+
+        var u_id = $("#u_id").val();
+        if (u_id) {
+            var url = '/admin/user/edit/id/' + u_id;
+            App.openWindow(url, "EditFrom", 500, 300);
+        }
+    });
+
+    var App = {
+    		popup : new Array(),
+    		openWindow: function (url,name,w,h) {
+    		    var i = App.popup.length;
+    		    if(!w) w = window.screen.width*0.8;
+    		    if(!h) h = window.screen.height*0.7;
+    		    var l = (window.screen.width) ? (window.screen.width-w)/2 : 0;
+    	        var t = (window.screen.height) ? (window.screen.height-h)/2 : 0;
+
+    		    name = name.replace(" ","").replace("-","");
+    		    App.popup[i] = window.open(url,name,"scrollbars=yes,resizable=yes,width="+w+",height="+h+",top="+t+",left="+l);
+    		}
+    	};
+</script>

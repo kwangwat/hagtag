@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="<?php echo $this->sysSetting['HT_meta_description']?>">
+<meta name="author" content="<?php echo $this->sysSetting['HT_meta_author']?>">
+<meta name="keyword" content="<?php echo $this->sysSetting['HT_meta_keywords']?>">
+<link rel="shortcut icon" href="img/favicon.png">
+<title><?php echo $this->sysSetting['HT_application_name']?> : <?php echo $this->tr->_('SIGN_IN')?></title>
+</head>
+<body>
+	<div>
+		<div id="pgWidth" class="pgWidth">
+			<h1>
+				<span class="shpt">Get started</span>
+			</h1>
+			<table class="mgtb" border="1">
+				<tbody>
+					<tr>
+						<td width="80%" valign="top">
+							<div>
+								<h2>
+									<span class="col"> Create your personal account or <a href="#">start a business account</a>.</span>
+								</h2>
+							</div>
+						</td>
+						<td width="20%" valign="top"></td>
+					</tr>
+					<tr>
+						<td width="80%" valign="top">
+							<div>
+								<form onsubmit="return false;" id="ppaRegForm" name="ppaRegForm" method="post" action="#">
+									<div id="ppa_id">
+										<div tabindex="-1" role="main" id="mainContent"></div>
+										<div class="txc">
+											<div id="firstname_d" class="rfl">
+												<div class="fv-w">
+													<label for="firstname" id="lblfirstname">First name</label>
+													<div class="fv-tw " id="firstname_r">
+														<input type="text" size="32" id="firstname" value="" name="firstname" maxlength="64">
+														<div>
+															<div id="firstname_w">Please enter your first name.</div>
+														</div>
+													</div>
+												</div>
+											</div>
+											<div id="lastname_d" class="rln">
+												<div class="fv-w">
+													<label for="lastname" id="lbllastname">Last name</label>
+													<div id="lastname_r">
+														<input type="text" size="32" id="lastname" value="" name="lastname" maxlength="64">
+														<div>
+															<div id="lastname_w">Please enter your last name.</div>
+														</div>
+													</div>
+												</div>
+											</div>
+											<div class="rcl"></div>
+											<div>
+												<div class="rfl">
+													<div>
+														<label for="email" id="lblemail">Email</label>
+														<div id="email_r">
+															<input type="text" size="32" id="email" value="" name="email" maxlength="64">
+															<div>
+																<div id="email_w">Please enter your email address.</div>
+															</div>
+														</div>
+													</div>
+												</div>
+											</div>
+											<div class="rcl"></div>
+											<input type="hidden" value="" id="userid" name="userid">
+											<div>
+												<div id="PASSWORD_d">
+													<div>
+														<label for="PASSWORD" id="lblPASSWORD">Create your password</label>
+														<div id="PASSWORD_r">
+															<input type="password" autocomplete="off" oncopy="return false"	size="32" id="PASSWORD" value="" name="pass" maxlength="64">
+															<div>
+																<div id="PASSWORD_w">Please enter your password.</div>
+															</div>
+														</div>
+													</div>
+												</div>
+												<b id="ptck" class="rfl"></b>
+												<div id="pass_st" class="rfl re-mt">
+													<span id="txt">Strength</span>
+													<div>
+														<div id="pwds"></div>
+													</div>
+												</div>
+												<div id="PASSWORD_id">
+													<b class="tip"></b>
+													<div>
+														<ul id="PASSWORD_tips">
+															<li>Use 6 to 64 characters.</li>
+															<li>Besides letters, include at least a number or symbol (!@#$%^*-_+=).</li>
+															<li>Password is case sensitive.</li>
+															<li>Avoid using the same password for multiple sites.</li>
+														</ul>
+													</div>
+												</div>
+												<div class="rcl"></div>
+											</div>
+											<div>
+												<div>
+													<label for="rpass" id="lblrpass">Confirm password</label>
+													<div id="rpass_r">
+														<input type="password" autocomplete="off" oncopy="return false"	size="32" id="rpass" value="" name="rpass" maxlength="64">
+														<div>
+															<div id="rpass_w">Please enter your password again.</div>
+														</div>
+													</div>
+												</div>
+											</div>
+										</div>
+										<div>
+											<!-- shows new term of use -->
+											<div id="promotion_wrp">
+												<div id="promotion">
+													<label id="promotion_label"></label>
+													<ul>
+														<li>
+														<span class="gspr chk-on"></span>
+														<span class="chk-lb" tabindex="0"> Receive exclusive offers and promotions from eBay</span>
+														<input type="checkbox" checked="true" class="chk-input"	name="promotion" id="ckb_0"></li>
+													</ul>
+												</div>
+											</div>
+										</div>
+										<div class="h40">
+											<div class="rfl">
+												<input type="submit" value="Register" id="sbtBtn">
+											</div>
+										</div>
+									</div>
+								</form>
+							</div>
+						</td>
+						<td width="20%" valign="top" id="lcont">
+							<div>
+								<div>
+									<div>
+										<div>
+											<div>
+												<h2>
+													<b>Already have an account?</b>
+												</h2>
+											</div>
+											<form name="signinForm" id="signinForm" method="post" action="https://signin.ebay.com/ws/eBayISAPI.dll?SignIn2">
+												<span><input type="submit" value="Sign in" class="btn btn-ter" id="w1-3"></span>
+											</form>
+										</div>
+									</div>
+								</div>
+							</div>
+						</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+		<footer id="glbfooter">
+			<h2>Additional site navigation</h2>
+		</footer>
+		<!--<![endif]-->
+		<div id="cfly">
+			<div>
+				<div style="display: none;" id="throbberID_th">
+					<div class="thr-txt">Processing...</div>
+				</div>
+			</div>
+			<div id="con_id">
+				<div id="infDv">Welcome ##1##! Your eBay user ID will be ##2##.</div>
+				<div id="pEml">We'll send messages regarding your account to: ##1##</div>
+				<div>
+					<div>
+						<button class="btn btn-prim" id="cfBtn">Continue</button>
+					</div>
+					<div>
+						<a href="javascript:;" id="backlnk">Change email address</a>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</body>
+</html>

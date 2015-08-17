@@ -1,0 +1,58 @@
+<link rel="stylesheet" type="text/css" href="//cdn.datatables.net/1.10.7/css/jquery.dataTables.min.css">
+<table id="mainTable" class="display" width="100%" cellspacing="0">
+    <thead>
+        <tr>
+            <th>Setting name</th>
+            <th>Setting value</th>
+            <th>Setting time</th>
+            <th>Action</th>
+        </tr>
+    </thead>
+
+    <tfoot>
+        <tr>
+            <th></th>
+            <th></th>
+            <th></th>
+            <th></th>
+        </tr>
+    </tfoot>
+
+    <tbody>
+        <?php foreach ($this->data as $rows) :?>
+        <tr>
+            <td align="center" width="220"><?php echo $rows['setting_name'];?></td>
+            <td align="center"><?php echo $rows['setting_value'];?></td>
+            <td align="center" width="180"><?php echo $rows['setting_updated'];?></td>
+            <td width="120">
+                <input type="button" name="edit" value="Edit" onclick="editRow('<?php echo $rows['setting_name'];?>');"/>
+                <input type="button" name="delete" value="Delete" onclick="confirmDelete('<?php echo $rows['setting_name'];?>');"/>
+            </td>
+        </tr>
+        <?php endforeach;?>
+    </tbody>
+</table>
+<br/><br/>
+<script src="//cdn.datatables.net/1.10.7/js/jquery.dataTables.min.js"></script>
+<script type="text/javascript">
+$(document).ready(function() {
+    $('#mainTable').dataTable();
+} );
+</script>
+<script type="text/javascript">
+function editRow(code){
+	
+}
+function confirmDelete(code){
+    if(confirm("Do you want delete \""+code+"\" ?")){
+        $.post("/admin/system-setting/delete", {'code': code}, function(r) {
+            if(r){
+                alert(r);
+            }else{
+            	alert("Delete date complete!");
+                window.location.href = "/admin/system-setting/index";
+            }
+        });
+    }
+}
+</script>
