@@ -31,7 +31,34 @@ Change the `application.ini` (can be found in application/configs), to your conf
 
 Installation
 ------------
+% zf create project quickstart
 
+    quickstart
+    |-- application
+    |   |-- Bootstrap.php
+    |   |-- configs
+    |   |   `-- application.ini
+    |   |-- controllers
+    |   |   |-- ErrorController.php
+    |   |   `-- IndexController.php
+    |   |-- models
+    |   `-- views
+    |       |-- helpers
+    |       `-- scripts
+    |           |-- error
+    |           |   `-- error.phtml
+    |           `-- index
+    |               `-- index.phtml
+    |-- library
+    |-- public
+    |   |-- .htaccess
+    |   `-- index.php
+    `-- tests
+        |-- application
+        |   `-- bootstrap.php
+        |-- library
+        |   `-- bootstrap.php
+        `-- phpunit.xml
 
 Web Server Setup
 ----------------
@@ -53,10 +80,12 @@ To setup apache, setup a virtual host to point to the public/ directory of the
 project and you should be ready to go! It should look something like below:
 
     <VirtualHost *:80>
-        ServerName zf-tutorial.localhost
-        DocumentRoot /path/to/zf-tutorial/public
+        ServerName quickstart.local
+        DocumentRoot /path/to/quickstart/public
+     
         SetEnv APPLICATION_ENV "development"
-        <Directory /path/to/zf-tutorial/public>
+     
+        <Directory /path/to/quickstart/public>
             DirectoryIndex index.php
             AllowOverride All
             Order allow,deny
